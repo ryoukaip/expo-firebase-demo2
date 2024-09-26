@@ -31,7 +31,7 @@ const LoginScreen = ({ navigation }) => {
         const user = userCredential.user;
         // Alert.alert("Login Success", `Welcome ${user.email}`);
         setLoading(false);
-        navigation.navigate("ListUser");
+        navigation.navigate("ListJob");
       })
       .catch((error) => {
         const errorMessage = error.message;
