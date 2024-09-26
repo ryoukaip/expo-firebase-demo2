@@ -54,8 +54,8 @@ const ListJob = ({ navigation }) => {
       <Text>{item.price}đ</Text>
       <TouchableOpacity
         style={styles.button}
-        // onPress={() => navigation.navigate("UpdateUser", { user: item })}
-        onPress={() => alert("Not implemented!")}
+        onPress={() => navigation.navigate("UpdateService", { user: item })}
+        // onPress={() => alert("Not implemented!")}
       >
         <Text>Update</Text>
       </TouchableOpacity>

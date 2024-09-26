@@ -12,6 +12,7 @@ import ListJob from "../screens/ListJob";
 import AddJob from "../screens/AddJob";
 import DeleteJob from "../screens/DeleteJob";
 import ServiceDetail from "../screens/ServiceDetail";
+import UpdateService from "../screens/UpdateService";
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
@@ -29,7 +30,7 @@ const StackNavigator = () => {
       <Stack.Screen name="AddJob" component={AddJob} />
       <Stack.Screen name="DeleteJob" component={DeleteJob} />
       <Stack.Screen name="ServiceDetail" component={ServiceDetail} />
-      {/* <Stack.Screen name="ListJob" component={ListJob} /> */}
+      <Stack.Screen name="UpdateService" component={UpdateService} />
     </Stack.Navigator>
   );
 };
