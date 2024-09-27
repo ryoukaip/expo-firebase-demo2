@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable, ActivityIndicator, StyleSheet } from 'react-native';
-import { doc, deleteDoc } from 'firebase/firestore';
+import { doc, deleteDoc, getDoc } from 'firebase/firestore';
 import { db } from '../apis/firebaseConfig';
+import { useFocusEffect } from '@react-navigation/native';
+import { useCallback } from 'react';
 
 const DeleteJob = ({ route, navigation }) => {
   const { serviceId } = route.params;
-  const { user } = route.params;
+  const [service, setService] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleDeleteJob = async () => {
@@ -20,9 +22,45 @@ const DeleteJob = ({ route, navigation }) => {
     }
   };
 
+  const handleServiceDetail = async () => {
+    setLoading(true);
+    try {
+      const docRef = doc(db, "services", serviceId);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setService(docSnap.data());  // Extract and set the document data
+      } else {
+        console.log("No such document!");
+      }
+    } catch (e) {
+      console.error("Error fetching service details: ", e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      handleServiceDetail();  // Fetch service details when screen is focused
+      console.log(serviceId);  // Log the service ID for debugging
+    }, [serviceId])
+  );
+
   return (
     <View>
       <Text style={styles.screenTitle}>Are you sure you want to delete this service?</Text>
+      {service ? (
+        <View>
+          <Text>Creator: {service.creator}</Text>
+          <Text>Name: {service.name}</Text>
+          <Text>Price: {service.price}</Text>
+          <Text>Time: {service.time}</Text>
+          <Text>Final Update: {service.finalUpdate}</Text>
+        </View>
+      ) : (
+        <Text>No service data available</Text>
+      )}
       <Pressable  onPress={handleDeleteJob} style={styles.button}>
         <Text style={styles.buttonText}>Delete</Text>
       </Pressable>

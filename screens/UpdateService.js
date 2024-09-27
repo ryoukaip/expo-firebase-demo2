@@ -31,7 +31,7 @@ const UpdateService = ({ route, navigation }) => {
 
   return (
     <View>
-      <Text style={styles.screenTitle}>Update User</Text>
+      <Text style={styles.screenTitle}>Update Service</Text>
       <TextInput placeholder="Name" value={name} onChangeText={setName} style={styles.input}/>
       <TextInput placeholder="Price" value={price} onChangeText={setPrice} keyboardType="numeric" style={styles.input} />
       <TextInput placeholder='Creator' value={creator} onChangeText={setCreator} style={styles.input}/>
